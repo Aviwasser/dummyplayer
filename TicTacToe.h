@@ -13,17 +13,6 @@ class TicTacToe {
 	Player* _winner;
 
 
-
-	/**
-	 * Return true if row y is full with char c.
-	 */
-	bool fullCol(uint x, char c) {
-		for (uint y=0; y<_board.size(); ++y) {
-			if (_board[{y,x}]!=c)
-				return false;
-		}
-		return true;
-	}
 	void playAndVerify(Player& currentPlayer, Player& otherPlayer) {
 		Coordinate move{0,0};
 		try {
@@ -43,8 +32,16 @@ class TicTacToe {
 			_winner = &currentPlayer;
 		}
 	}
-
-
+		/**
+	 * Return true if row y is full with char c.
+	 */
+	bool fullCol(uint x, char c) {
+		for (uint y=0; y<_board.size(); ++y) {
+			if (_board[{y,x}]!=c)
+				return false;
+		}
+		return true;
+	}
 	bool isWinner(char c) {
 		// Check winner in cols:
 		for (uint x=0; x<_board.size(); ++x) {
@@ -72,8 +69,6 @@ class TicTacToe {
 		}
 		return true;
 	}
-
-	
 	
 public:
 	TicTacToe(uint size): 
