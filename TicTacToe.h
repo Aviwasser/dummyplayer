@@ -12,16 +12,7 @@ class TicTacToe {
 	uint _maxSteps;
 	Player* _winner;
 
-	/**
-	 * Return true if row y is full with char c.
-	 */
-	bool fullRow(uint y, char c) {
-		for (uint x=0; x<_board.size(); ++x) {
-			if (_board[{y,x}]!=c)
-				return false;
-		}
-		return true;
-	}
+
 
 	/**
 	 * Return true if row y is full with char c.
@@ -33,25 +24,6 @@ class TicTacToe {
 		}
 		return true;
 	}
-
-	bool isWinner(char c) {
-		// Check winner in cols:
-		for (uint x=0; x<_board.size(); ++x) {
-			if (fullCol(x,c)) {
-				return true;
-			}
-		}
-
-		// Check winner in rows:
-		for (uint y=0; y<_board.size(); ++y) {
-			if (fullRow(y,c)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	void playAndVerify(Player& currentPlayer, Player& otherPlayer) {
 		Coordinate move{0,0};
 		try {
@@ -72,6 +44,36 @@ class TicTacToe {
 		}
 	}
 
+
+	bool isWinner(char c) {
+		// Check winner in cols:
+		for (uint x=0; x<_board.size(); ++x) {
+			if (fullCol(x,c)) {
+				return true;
+			}
+		}
+
+		// Check winner in rows:
+		for (uint y=0; y<_board.size(); ++y) {
+			if (fullRow(y,c)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+		/**
+	 * Return true if row y is full with char c.
+	 */
+	bool fullRow(uint y, char c) {
+		for (uint x=0; x<_board.size(); ++x) {
+			if (_board[{y,x}]!=c)
+				return false;
+		}
+		return true;
+	}
+
+	
 	
 public:
 	TicTacToe(uint size): 
@@ -92,16 +94,16 @@ public:
 		}
 	}
 
+
+	const Player& winner() const {
+		return *_winner;
+	}
+	const Board& board() const { 
+		return _board; 
+	}
 	void printResults() const {
 		cout << "And the winner is " << winner().name() << ", playing as " << winner().getChar() << "!" << endl;
 		cout << "The final board is " << endl << board() << endl;
 	}
 
-	const Board& board() const { 
-		return _board; 
-	}
-
-	const Player& winner() const {
-		return *_winner;
-	}
 };
