@@ -17,9 +17,9 @@ class BoardLocation {
 	char& loc;
 public:
 	BoardLocation(char& loc): loc(loc) {}
-	BoardLocation& operator=(char c) {
+	BoardLocation& operator=(char ch) {
 		verify(c);
-		loc = c;
+		loc = ch;
 		return *this;
 	}
 
@@ -31,10 +31,10 @@ public:
  */
 class Board {
 	char* theChars;
-	uint theSize;
+	uint Size;
 
 	uint offset(uint x, uint y) const {
-		return x + y*theSize;
+		return x + y*Size;
 	}
 
 public:
@@ -43,12 +43,12 @@ public:
 	}
 
 	uint size() const {
-		return theSize;
+		return Size;
 	}
 
 	Board& operator=(char c) {
 		verify(c);
-		for(uint i=0; i<theSize*theSize; ++i) {
+		for(uint i=0; i<Size*Size; ++i) {
 			theChars[i] = '.';
 		}
 		return *this;
